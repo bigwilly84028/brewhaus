@@ -1,4 +1,11 @@
 <template>
+  <!--
+  NOT CURRENTLY USED 
+  TODO: break down code into smaller components
+  for future scalability. This would be next steps
+  if this were a real app and were spending more 
+  time on it :) 
+  -->
   <ion-item
     v-if="brewery"
     :routerLink="'/brewery/' + brewery.id"

@@ -1,3 +1,7 @@
+//NEXT STEPS: Pipe all API calls in the app
+//through this file for reusability
+//whereas currently they are local to each vue file.
+
 import axios from "axios";
 
 export interface Brewery {
