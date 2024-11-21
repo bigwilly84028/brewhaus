@@ -1,0 +1,7 @@
+{
+  "name": "brewhaus-ww",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
