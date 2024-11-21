@@ -12,7 +12,11 @@
     </ion-header>
 
     <ion-content>
-      <ion-list>
+      <ion-progress-bar
+        v-if="!breweries.length"
+        type="indeterminate"
+      ></ion-progress-bar>
+      <ion-list v-else>
         <ion-item
           v-for="brewery in breweries"
           :key="brewery.id"
@@ -62,6 +66,7 @@ import {
   IonLabel,
   IonButtons,
   modalController,
+  IonProgressBar,
 } from "@ionic/vue";
 
 import { beerOutline, search, starHalfOutline } from "ionicons/icons";
@@ -81,6 +86,7 @@ export default {
     IonItem,
     IonLabel,
     IonButtons,
+    IonProgressBar,
   },
   setup() {
     const breweries = ref([]); // List of loaded breweries
