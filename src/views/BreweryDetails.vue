@@ -213,7 +213,7 @@ export default defineComponent({
     const getBackButtonText = () => {
       const win = window as any;
       const mode = win && win.Ionic && win.Ionic.mode;
-      return mode === "ios" ? "Inbox" : "";
+      return mode === "ios" ? "Back" : "";
     };
 
     return {
