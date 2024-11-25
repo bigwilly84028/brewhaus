@@ -1,8 +1,8 @@
 <template>
-  <ion-page>
+  <ion-page v-if="brewery">
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>{{ brewery.name }}</ion-title>
+        <ion-title>{{ brewery.name ? brewery.name : "" }}</ion-title>
         <ion-buttons slot="start">
           <ion-back-button
             :text="getBackButtonText()"
@@ -134,6 +134,7 @@
 <script lang="ts">
 import {
   IonBackButton,
+  IonTitle,
   IonButtons,
   IonContent,
   IonHeader,
@@ -148,7 +149,6 @@ import {
   IonFooter,
 } from "@ionic/vue";
 import { ref, defineComponent, onMounted } from "vue";
-import axios from "axios";
 import { useRoute } from "vue-router";
 import StarRating from "vue-star-rating";
 import {
@@ -162,11 +162,13 @@ import {
 } from "ionicons/icons";
 import { Device } from "@capacitor/device";
 import { AppLauncher } from "@capacitor/app-launcher";
+import { useBreweries } from "@/data/useBreweries";
 
 export default defineComponent({
   name: "BreweryDetails",
   components: {
     IonBackButton,
+    IonTitle,
     IonButtons,
     IonContent,
     IonHeader,
@@ -183,21 +185,11 @@ export default defineComponent({
   },
   setup() {
     const route = useRoute();
+    const { brewery, fetchBreweryById } = useBreweries();
 
-    // Fetch the brewery details using the route parameter
-    const brewery = ref([]);
-
-    const getBrewery = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.openbrewerydb.org/v1/breweries/${route.params.id}`
-        );
-
-        brewery.value = response.data;
-      } catch (error) {
-        console.error("Error fetching brewery:", error);
-      }
-    };
+    onMounted(() => {
+      fetchBreweryById(route.params.id as string);
+    });
 
     const routeToService = async (geoCode: object) => {
       const deviceInfo = await Device.getInfo();
@@ -209,8 +201,6 @@ export default defineComponent({
             : `https://www.google.com/maps/dir/?api=1&destination=${geoCode.lat},${geoCode.long}`,
       });
     };
-
-    onMounted(getBrewery);
 
     // Determine the back button text based on the platform
     const getBackButtonText = () => {

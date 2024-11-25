@@ -54,6 +54,9 @@
 import { onMounted } from "vue";
 import {
   IonPage,
+  IonTitle,
+  IonButton,
+  IonIcon,
   IonHeader,
   IonToolbar,
   IonContent,
@@ -74,6 +77,9 @@ export default {
   name: "BreweriesList",
   components: {
     IonPage,
+    IonTitle,
+    IonButton,
+    IonIcon,
     IonHeader,
     IonToolbar,
     IonContent,
