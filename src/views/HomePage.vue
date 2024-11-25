@@ -12,10 +12,13 @@
     </ion-header>
 
     <ion-content>
+      <!-- Progress Bar -->
       <ion-progress-bar
         v-if="!breweries.length"
         type="indeterminate"
       ></ion-progress-bar>
+
+      <!-- Breweries List -->
       <ion-list v-else>
         <ion-item
           v-for="brewery in breweries"
@@ -95,6 +98,10 @@ export default {
     const { breweries, fetchBreweries, loadMoreBreweries, hasMoreData } =
       useBreweries();
 
+    // Fetch initial data on component mount
+    onMounted(fetchBreweries);
+
+    // open search breweries modal window
     async function openModal() {
       const modal = await modalController.create({
         component: SearchBreweries,
@@ -102,9 +109,6 @@ export default {
 
       modal.present();
     }
-
-    // Fetch initial data on component mount
-    onMounted(fetchBreweries);
 
     return {
       breweries,

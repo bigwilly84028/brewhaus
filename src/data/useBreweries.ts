@@ -1,4 +1,3 @@
-// src/composables/useBreweries.ts
 import { ref } from "vue";
 import axios from "axios";
 
@@ -30,19 +29,6 @@ export function useBreweries() {
     }
   };
 
-  // Fetch a single brewery by ID
-  const fetchBreweryById = async (id: string) => {
-    try {
-      const response = await axios.get(
-        `https://api.openbrewerydb.org/v1/breweries/${id}`
-      );
-      brewery.value = response.data;
-    } catch (error) {
-      console.error("Error fetching brewery:", error);
-      brewery.value = {};
-    }
-  };
-
   // Load more breweries when Infinite Scroll is triggered
   const loadMoreBreweries = async (event: any) => {
     if (hasMoreData.value) {
@@ -52,6 +38,19 @@ export function useBreweries() {
 
     // Notify Infinite Scroll to complete
     event.target.complete();
+  };
+
+  // Fetch a single brewery by ID
+  const fetchBreweryById = async (id: string) => {
+    try {
+      const response = await axios.get(
+        `https://api.openbrewerydb.org/v1/breweries/${id}`
+      );
+      brewery.value = response.data;
+    } catch (error) {
+      console.error("Error fetching brewery:", error);
+      brewery.value = null;
+    }
   };
 
   return {
