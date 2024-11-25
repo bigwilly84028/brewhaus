@@ -59,7 +59,7 @@
               </ion-col>
               |
               <ion-col size="auto">
-                <a :href="brewery.website_url">
+                <a :href="brewery.website_url" target="_blank">
                   {{ brewery.website_url }}
                 </a>
               </ion-col>
