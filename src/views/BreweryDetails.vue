@@ -43,6 +43,7 @@
                       :show-rating="false"
                       :star-size="20"
                       inactive-color="#a2a2a2"
+                      @click="deadEnd()"
                     />
                   </ion-col>
                   <ion-col size="auto">
@@ -88,13 +89,13 @@
                 >
               </ion-col>
               <ion-col>
-                <ion-button expand="block" color="warning">
+                <ion-button expand="block" color="warning" @click="deadEnd()">
                   <ion-icon slot="start" :icon="share"></ion-icon>
                   Share</ion-button
                 >
               </ion-col>
               <ion-col>
-                <ion-button expand="block" color="danger">
+                <ion-button expand="block" color="danger" @click="deadEnd()">
                   <ion-icon slot="start" :icon="starHalf"></ion-icon>
                   Rate</ion-button
                 >
@@ -124,7 +125,9 @@
     <ion-footer>
       <ion-toolbar>
         <ion-buttons slot="end">
-          <ion-button color="primary">report problem</ion-button>
+          <ion-button color="primary" @click="deadEnd()"
+            >report problem</ion-button
+          >
         </ion-buttons>
       </ion-toolbar>
     </ion-footer>
@@ -202,6 +205,10 @@ export default defineComponent({
       });
     };
 
+    const deadEnd = () => {
+      alert("Nothing Here Yet!");
+    };
+
     // Determine the back button text based on the platform
     const getBackButtonText = () => {
       const win = window as any;
@@ -220,6 +227,7 @@ export default defineComponent({
       share,
       star,
       routeToService,
+      deadEnd,
     };
   },
 });
