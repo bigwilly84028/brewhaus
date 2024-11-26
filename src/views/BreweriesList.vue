@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Breweries List</ion-title>
+        <ion-title>Browse Breweries</ion-title>
         <ion-buttons slot="end">
           <ion-button @click="openModal">
             <ion-icon slot="icon-only" :icon="search"></ion-icon>
