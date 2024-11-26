@@ -73,7 +73,7 @@ import {
   IonProgressBar,
 } from "@ionic/vue";
 import { beerOutline, search, starHalfOutline } from "ionicons/icons";
-import SearchBreweries from "./SearchBreweries.vue";
+import BreweriesSearch from "./BreweriesSearch.vue";
 import { useBreweries } from "@/data/useBreweries";
 
 export default {
@@ -104,7 +104,7 @@ export default {
     // open search breweries modal window
     async function openModal() {
       const modal = await modalController.create({
-        component: SearchBreweries,
+        component: BreweriesSearch,
       });
 
       modal.present();

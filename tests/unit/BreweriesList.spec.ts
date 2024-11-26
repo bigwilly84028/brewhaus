@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import HomePage from "../../src/views/HomePage.vue";
+import BreweriesList from "../../src/views/BreweriesList.vue";
 import { useBreweries } from "../../src/data/useBreweries";
 import { modalController } from "@ionic/vue";
 import { IonInfiniteScroll } from "@ionic/vue";
@@ -10,7 +10,7 @@ vi.mock("@/data/useBreweries", () => ({
   useBreweries: vi.fn(),
 }));
 
-describe("HomePage.vue", () => {
+describe("BreweriesList.vue", () => {
   let mockBreweries;
 
   beforeEach(() => {
@@ -28,7 +28,7 @@ describe("HomePage.vue", () => {
   });
 
   it("renders the header and title", () => {
-    const wrapper = mount(HomePage);
+    const wrapper = mount(BreweriesList);
     expect(wrapper.find("ion-title").text()).toBe("Breweries List");
   });
 
@@ -40,12 +40,12 @@ describe("HomePage.vue", () => {
       hasMoreData: true,
     });
 
-    const wrapper = mount(HomePage);
+    const wrapper = mount(BreweriesList);
     expect(wrapper.find("ion-progress-bar").exists()).toBe(true);
   });
 
   it("renders a list of breweries when data is available", () => {
-    const wrapper = mount(HomePage);
+    const wrapper = mount(BreweriesList);
 
     const breweryItems = wrapper.findAll("ion-item");
     expect(breweryItems.length).toBe(mockBreweries.length);
@@ -54,7 +54,7 @@ describe("HomePage.vue", () => {
   });
 
   it("navigates to the correct route when a brewery item is clicked", async () => {
-    const wrapper = mount(HomePage, {
+    const wrapper = mount(BreweriesList, {
       global: {
         mocks: {
           $router: {
@@ -74,7 +74,7 @@ describe("HomePage.vue", () => {
     // Mock loadMoreBreweries
     const loadMoreBreweries = vi.fn();
 
-    const wrapper = mount(HomePage, {
+    const wrapper = mount(BreweriesList, {
       global: {
         stubs: {
           "ion-infinite-scroll": IonInfiniteScroll,
@@ -103,7 +103,7 @@ describe("HomePage.vue", () => {
   });
 
   it("opens the search modal when the search button is clicked", async () => {
-    const wrapper = mount(HomePage);
+    const wrapper = mount(BreweriesList);
     const searchButton = wrapper.find("ion-button");
     await searchButton.trigger("click");
 
@@ -121,7 +121,7 @@ describe("HomePage.vue", () => {
       hasMoreData: true,
     });
 
-    mount(HomePage);
+    mount(BreweriesList);
 
     expect(fetchBreweriesMock).toHaveBeenCalled();
   });
